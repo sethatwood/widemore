@@ -1,0 +1,251 @@
+/* The popup speaks the extension's own language: the toast's dark glass and
+   monospace, the rail's teal. One typeface, one accent, hairline dividers. */
+
+:root {
+  --ink: #14161a;
+  --well: #1d222a;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e6ebee;
+  --dim: #8a939e;
+  --teal: #2bbf9f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 292px;
+  background: var(--ink);
+  color: var(--text);
+  font: 400 11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  user-select: none;
+}
+
+section { padding: 10px 14px; border-top: 1px solid var(--line); }
+
+/* ---- header ---- */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+}
+
+h1 { font-size: 14px; font-weight: 600; letter-spacing: 0.02em; }
+
+/* ---- switches ---- */
+
+.switch {
+  position: relative;
+  width: 34px;
+  height: 19px;
+  flex: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: #2a3038;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+.switch .dot {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 7px;
+  background: #aeb6bf;
+  transition: left 0.18s ease, background 0.18s ease;
+}
+.switch[aria-checked="true"] { background: var(--teal); border-color: var(--teal); }
+.switch[aria-checked="true"] .dot { left: 17px; background: #0e2b24; }
+.switch.small { width: 30px; height: 17px; }
+.switch.small .dot { width: 11px; height: 11px; }
+.switch.small[aria-checked="true"] .dot { left: 15px; }
+.switch:disabled { opacity: 0.35; cursor: default; }
+
+/* ---- rows ---- */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 26px;
+}
+.row + .row { margin-top: 2px; }
+.row label, .row .label { width: 64px; flex: none; color: var(--dim); }
+.row output { width: 42px; flex: none; text-align: right; color: var(--dim); font-size: 10px; }
+.site { display: flex; justify-content: space-between; }
+.site .label { width: auto; }
+
+/* ---- preset chips: each one is a miniature rail ---- */
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.chip {
+  font: inherit;
+  color: var(--dim);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+.chip .mini {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  background: var(--well);
+  position: relative;
+  overflow: hidden;
+}
+.chip .mrail {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.chip .name { font-size: 9px; }
+.chip:hover { border-color: var(--line); }
+.chip.on { border-color: var(--teal); }
+.chip.on .name { color: var(--teal); }
+
+/* ---- sliders: the thumb is a tiny rail ---- */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  flex: 1;
+  min-width: 0;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.14);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 7px;
+  height: 17px;
+  border-radius: 4px;
+  background: var(--teal);
+  margin-top: -7px;
+}
+
+/* ---- color and the clear finish ---- */
+
+input[type="color"] {
+  inline-size: 34px;
+  block-size: 20px;
+  flex: none;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 3px; }
+input[type="color"].dimmed { opacity: 0.3; }
+
+.resetchip {
+  font: inherit;
+  font-size: 13px;
+  width: 22px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: none;
+  color: var(--teal);
+  cursor: pointer;
+  line-height: 1;
+}
+.resetchip:hover { background: var(--well); }
+.resetchip[hidden] { display: none; }
+
+.clearchip {
+  font: inherit;
+  font-size: 10px;
+  color: var(--dim);
+  padding: 2px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  /* faint stripes: the universal sign for "transparent goes here" */
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%,
+      transparent 50%, rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.08) 75%, transparent 75%) 0 0 / 8px 8px,
+    var(--well);
+}
+.clearchip[aria-pressed="true"] { border-color: var(--teal); color: var(--teal); }
+
+/* ---- segmented controls ---- */
+
+.seg {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  background: var(--well);
+  border-radius: 7px;
+  padding: 2px;
+}
+.seg button {
+  flex: 1;
+  font: inherit;
+  font-size: 10px;
+  color: var(--dim);
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+.seg button.on { background: #2a3138; color: var(--teal); }
+
+/* ---- footer ---- */
+
+footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 10px;
+}
+.linky {
+  font: inherit;
+  font-size: 10px;
+  color: var(--teal);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+footer a { margin-left: auto; color: var(--dim); text-decoration: none; }
+footer a:hover { color: var(--teal); }
+
+/* ---- states ---- */
+
+body.off .presets,
+body.off .knobs,
+body.off .place,
+body.off .site { opacity: 0.4; pointer-events: none; }
+
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

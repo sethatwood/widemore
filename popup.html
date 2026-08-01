@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>widemore</h1>
+    <button id="master" class="switch" role="switch" aria-checked="true" aria-label="widemore on or off"><span class="dot"></span></button>
+  </header>
+
+  <section class="row site" id="siteRow">
+    <span class="label" id="siteLabel">on this site</span>
+    <button id="site" class="switch small" role="switch" aria-checked="true" aria-label="enabled on this site"><span class="dot"></span></button>
+  </section>
+
+  <section class="presets" id="presets" aria-label="presets"></section>
+
+  <section class="knobs" id="knobs">
+    <div class="row">
+      <label for="base">size</label>
+      <input id="base" type="range" min="14" max="40" step="1">
+      <output id="baseVal" for="base"></output>
+    </div>
+    <div class="row">
+      <label for="barWidth">width</label>
+      <input id="barWidth" type="range" min="6" max="32" step="1">
+      <output id="barWidthVal" for="barWidth"></output>
+    </div>
+    <div class="row">
+      <label for="radius">shape</label>
+      <input id="radius" type="range" min="0" max="16" step="1">
+      <output id="radiusVal" for="radius"></output>
+    </div>
+    <div class="row">
+      <label for="presence">presence</label>
+      <input id="presence" type="range" min="0.25" max="1" step="0.05">
+      <output id="presenceVal" for="presence"></output>
+    </div>
+    <div class="row">
+      <label for="dwellMs">patience</label>
+      <input id="dwellMs" type="range" min="150" max="600" step="10">
+      <output id="dwellMsVal" for="dwellMs"></output>
+    </div>
+    <div class="row color">
+      <label for="accent">color</label>
+      <input id="accent" type="color" aria-label="accent color">
+      <button id="accentReset" class="resetchip" hidden title="back to the default teal" aria-label="reset color to the default teal">↺</button>
+      <button id="clear" class="clearchip" aria-pressed="false" title="colorless, frosted-glass finish">clear</button>
+    </div>
+  </section>
+
+  <section class="place" id="place">
+    <div class="row">
+      <span class="label">edges</span>
+      <div class="seg" id="edges" role="group" aria-label="which edges">
+        <button data-v="left">left</button><button data-v="both">both</button><button data-v="right">right</button>
+      </div>
+    </div>
+    <div class="row">
+      <span class="label">position</span>
+      <div class="seg" id="align" role="group" aria-label="vertical position">
+        <button data-v="high">high</button><button data-v="middle">middle</button><button data-v="low">low</button>
+      </div>
+    </div>
+    <div class="row" title="rails hide until your cursor nears an edge">
+      <span class="label">shy</span>
+      <button id="shyKnob" class="switch small" role="switch" aria-checked="false" aria-label="shy mode: rails hide until the cursor nears an edge"><span class="dot"></span></button>
+    </div>
+    <div class="row">
+      <span class="label">toasts</span>
+      <button id="toastKnob" class="switch small" role="switch" aria-checked="true" aria-label="show zoom toasts"><span class="dot"></span></button>
+    </div>
+  </section>
+
+  <footer>
+    <span id="shortcut" title="⌥⇧W turns widemore on or off · ⌥⇧F fits the page by keyboard">⌥⇧W · ⌥⇧F fit</span>
+    <button id="changeKey" class="linky">change</button>
+    <a href="https://widemore.page" target="_blank" rel="noreferrer">widemore.page</a>
+  </footer>
+
+  <script src="defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

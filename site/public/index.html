@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>widemore — hover the edge, fill the screen</title>
+  <meta name="description" content="A free browser extension that fills the dead space on ultrawide monitors: hover the edge of your screen and the page grows to fill it. Hover again to undo.">
+  <meta property="og:title" content="widemore — hover the edge, fill the screen">
+  <meta property="og:description" content="Hover the edge of your screen and the page grows to fill your ultrawide's dead space. Free forever.">
+  <meta property="og:url" content="https://widemore.page/">
+  <meta property="og:image" content="https://widemore.page/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0e1013">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="icon128.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <span class="wordmark">widemore</span>
+  <nav>
+    <a href="https://github.com/sethatwood/widemore">github</a>
+    <a href="privacy.html">privacy</a>
+    <a class="btn small" href="#get">get it</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1>i wish it was<br><em>wide more.</em></h1>
+    <p class="sub">You bought all that glass, and most pages hand a third of it
+      back in empty gutters. <strong>widemore</strong> is the free extension
+      that takes the dead space back: hover the edge of your screen and the
+      page you're reading grows to fill it. Hover again to undo.</p>
+
+    <div class="browser" aria-label="interactive demo of widemore">
+      <div class="browser-chrome">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span class="urlbar">en.wikipedia.org/wiki/Ultrawide_monitor</span>
+      </div>
+      <div class="demo-page" id="demoPage">
+        <div class="demo-col">
+          <div class="tl h"></div>
+          <div class="tl w95"></div>
+          <div class="tl"></div>
+          <div class="tl w88"></div>
+          <div class="tl w75"></div>
+          <div class="tl gap w95"></div>
+          <div class="tl"></div>
+          <div class="tl w88"></div>
+          <div class="tl w95"></div>
+          <div class="tl w60"></div>
+          <div class="tl gap w88"></div>
+          <div class="tl w95"></div>
+          <div class="tl w75"></div>
+          <div class="tl gap w95"></div>
+          <div class="tl w88"></div>
+          <div class="tl"></div>
+          <div class="tl w95"></div>
+          <div class="tl w60"></div>
+        </div>
+        <div class="demo-rail left" role="button" tabindex="0" aria-label="widemore rail — hold to fit the page">
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+        <div class="demo-rail right" role="button" tabindex="0" aria-label="widemore rail — hold to fit the page">
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+        <div class="demo-hint" id="demoHint" aria-hidden="true">← hover me</div>
+        <div class="demo-toast" id="demoToast" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="caption">try it — <em>rest your cursor on a teal rail</em> for a beat.</p>
+  </section>
+
+  <section class="wrap">
+    <h2>how it works</h2>
+    <div class="beats">
+      <article class="beat">
+        <span class="marker waiting" aria-hidden="true"></span>
+        <h3>hover the edge</h3>
+        <p>A faint rail waits at each side of every page. Rest your cursor on
+          one; a fill runs while you decide — drift away and nothing happens.</p>
+      </article>
+      <article class="beat">
+        <span class="marker armed" aria-hidden="true"></span>
+        <h3>the page fills your glass</h3>
+        <p>widemore finds the content column and zooms until it spans your
+          window, probing the layout as it goes so nothing breaks.</p>
+      </article>
+      <article class="beat">
+        <span class="marker resting" aria-hidden="true"></span>
+        <h3>hover again</h3>
+        <p>Everything back the way it was. The zoom lives in that one tab and
+          clears itself — nothing persists, nothing follows you around.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="custom wrap">
+    <h2>make it yours</h2>
+    <div class="chips" aria-hidden="true">
+      <div class="chip signal"><div class="mini"><span class="mrail"></span></div>signal</div>
+      <div class="chip glass"><div class="mini"><span class="mrail"></span></div>glass</div>
+      <div class="chip ghost"><div class="mini"><span class="mrail"></span></div>ghost</div>
+      <div class="chip ember"><div class="mini"><span class="mrail"></span></div>ember</div>
+      <div class="chip frame"><div class="mini"><span class="mrail"></span></div>frame</div>
+      <div class="chip beacon"><div class="mini"><span class="mrail"></span></div>beacon</div>
+    </div>
+    <p>Six presets and every setting behind them: <strong>color</strong> — or a
+      colorless frosted-glass finish — <strong>size</strong>,
+      <strong>width</strong>, <strong>shape</strong>, <strong>presence</strong>,
+      <strong>patience</strong>, and placement. Turn on <strong>shy mode</strong>
+      and the rails hide until your cursor comes looking. <kbd>⌥⇧W</kbd> turns
+      the whole thing off and on, and <kbd>⌥⇧F</kbd> fits the page straight
+      from the keyboard.</p>
+  </section>
+
+  <section class="trust wrap">
+    <h2>the fine print, which is short</h2>
+    <ul>
+      <li>no accounts</li>
+      <li>no analytics</li>
+      <li>no data leaves your browser</li>
+      <li>zoom is per-tab and clears itself</li>
+      <li>free forever</li>
+      <li>source on <a href="https://github.com/sethatwood/widemore">github</a></li>
+    </ul>
+  </section>
+
+  <section class="get wrap" id="get">
+    <div class="get-grid">
+      <div>
+        <h3>get widemore</h3>
+        <p>The Chrome Web Store listing is in review. widemore runs in Chrome
+          and Brave — same install, the day it lands. Built for ultrawides,
+          happy on any screen with room to spare.</p>
+        <span class="btn dim">chrome web store — in review</span>
+      </div>
+      <div>
+        <h3>get the next one</h3>
+        <p>We make small, sharp, free tools; widemore is the first. Leave your
+          email and hear when a new one ships — rare by design. Unsubscribe by
+          replying.</p>
+        <form class="signup" id="signup" action="subscribe.php" method="post">
+          <label class="hp" aria-hidden="true">leave this empty
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </label>
+          <input type="email" name="email" required maxlength="254"
+                 placeholder="you@example.com" aria-label="email address">
+          <button class="btn" type="submit">keep me posted</button>
+        </form>
+        <p class="form-note" id="formNote" role="status"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="links">
+    <a href="https://github.com/sethatwood/widemore">github</a>
+    <a href="privacy.html">privacy</a>
+    <a href="mailto:hello@widemore.page">hello@widemore.page</a>
+    <span>icon from <a href="https://tabler.io/icons">tabler icons</a></span>
+    <span>made by <a href="https://sethmerrickatwood.com">Seth Atwood</a></span>
+  </div>
+  <p class="wink">© <span id="year">2026</span> Seth Atwood · <a href="https://github.com/sethatwood/widemore/blob/main/LICENSE">mit licensed</a> · free forever</p>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>

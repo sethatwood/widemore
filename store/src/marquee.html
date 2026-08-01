@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><link rel="stylesheet" href="shared.css">
+<style>
+  body { width: 1400px; height: 560px; }
+  .mq {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 150px;
+  }
+  .mq .mark { font: 600 24px var(--mono); color: var(--dim); margin-bottom: 26px; }
+  .mq h1 { font: 600 76px/1.1 var(--mono); letter-spacing: -0.02em; }
+  .mq h1 em { font-style: normal; color: var(--teal); }
+  .mq p { font: 400 23px var(--mono); color: var(--dim); margin-top: 30px; }
+  .mq p b { color: var(--text); font-weight: 500; }
+  .edge-rail.l { width: 30px; height: 260px; border-radius: 0 15px 15px 0; }
+  .edge-rail.r { width: 30px; height: 380px; border-radius: 15px 0 0 15px; }
+</style>
+</head>
+<body>
+  <div class="edge-rail l"></div>
+  <div class="edge-rail r"></div>
+  <div class="mq">
+    <p class="mark">widemore</p>
+    <h1>i wish it was<br><em>wide more.</em></h1>
+    <p>hover the edge and the page fills your window — <b>free forever</b></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; background: #0e1013;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 130px; position: relative; overflow: hidden;
+  }
+  .rail { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; }
+  .rail.l { left: 0; height: 300px; background: rgba(128,128,128,.3);
+    border-radius: 0 16px 16px 0; box-shadow: inset 0 0 0 2px rgba(255,255,255,.18); }
+  .rail.r { right: 0; height: 420px; border-radius: 16px 0 0 16px;
+    background: linear-gradient(to bottom, rgba(43,191,159,.25), rgba(43,191,159,.85) 32%, #54d3b7 50%, rgba(43,191,159,.85) 68%, rgba(43,191,159,.25));
+    box-shadow: 0 0 60px rgba(43,191,159,.6); }
+  .mark { color: #8a939e; font-size: 26px; font-weight: 600; margin-bottom: 34px; }
+  h1 { color: #e6ebee; font-size: 88px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; }
+  h1 em { font-style: normal; color: #2bbf9f; }
+  .sub { color: #8a939e; font-size: 26px; margin-top: 40px; }
+  .sub b { color: #e6ebee; font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="rail l"></div>
+  <div class="rail r"></div>
+  <div class="mark">widemore</div>
+  <h1>i wish it was<br><em>wide more.</em></h1>
+  <p class="sub">fills the dead space on your ultrawide — free forever — <b>widemore.page</b></p>
+</body>
+</html>

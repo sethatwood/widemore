@@ -1,0 +1,247 @@
+/* Shared styling for the store assets. Same tokens as widemore.page; every
+   frame is a static scene rendered by headless Chrome at exact size. */
+
+:root {
+  --ink: #0e1013;
+  --panel: #14161a;
+  --well: #1c2129;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e6ebee;
+  --dim: #8a939e;
+  --teal: #2bbf9f;
+  --core: #54d3b7;
+  --paper: #f7f5f0;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 1280px;
+  height: 800px;
+  background: var(--ink);
+  color: var(--text);
+  font: 400 16px/1.6 var(--sans);
+  overflow: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.frame {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  height: 100%;
+  padding: 64px;
+}
+
+.cap { width: 360px; flex: none; }
+.cap h1 {
+  font: 600 46px/1.12 var(--mono);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.cap h1 em { font-style: normal; color: var(--teal); }
+.cap p { color: var(--dim); font-size: 17.5px; max-width: 32ch; }
+
+.wordmark {
+  position: absolute;
+  left: 64px;
+  bottom: 44px;
+  font: 600 15px var(--mono);
+  color: #565e67;
+}
+
+.stage { flex: 1; min-width: 0; }
+
+/* ---- the browser mock ---- */
+
+.browser {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.dots { display: flex; gap: 6px; }
+.dots span { width: 11px; height: 11px; border-radius: 6px; }
+.dots span:nth-child(1) { background: #e0605c; }
+.dots span:nth-child(2) { background: #e0aa39; }
+.dots span:nth-child(3) { background: #35b455; }
+.urlbar {
+  flex: 1;
+  max-width: 420px;
+  font: 400 12px var(--mono);
+  color: var(--dim);
+  background: var(--well);
+  border-radius: 7px;
+  padding: 5px 12px;
+}
+
+.demo-page {
+  position: relative;
+  height: 540px;
+  background: var(--paper);
+  overflow: hidden;
+  font-size: 11px;
+}
+.demo-page.zoomed { font-size: 19px; }
+
+.demo-col { width: 38%; margin: 2.6em auto 0; }
+.demo-page.zoomed .demo-col { width: 86%; }
+
+.tl { height: 0.6em; border-radius: 0.3em; background: #dbd6c9; margin: 0.62em 0; }
+.tl.h { height: 1.3em; width: 62%; background: #c6c0ae; margin: 0 0 1em; }
+.tl.w95 { width: 95%; }
+.tl.w88 { width: 88%; }
+.tl.w75 { width: 75%; }
+.tl.w60 { width: 60%; }
+.tl.gap { margin-top: 1.5em; }
+
+/* rails: static scenes set --fill inline to show the countdown mid-run */
+.demo-rail {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36%;
+  width: 22px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.demo-rail.hovering { height: 58%; }
+.demo-rail.left { left: 0; }
+.demo-rail.right { right: 0; }
+.demo-rail .bar {
+  position: relative;
+  width: 15px;
+  overflow: hidden;
+  background: rgba(43, 191, 159, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(43, 191, 159, 0.6),
+    0 0 14px rgba(43, 191, 159, 0.3);
+}
+.demo-rail.left .bar { border-radius: 0 8px 8px 0; }
+.demo-rail.right .bar { border-radius: 8px 0 0 8px; }
+.demo-rail.lit .bar {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 0 18px rgba(43, 191, 159, 0.65);
+}
+.demo-rail .fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleY(var(--fill, 0));
+  transform-origin: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(43, 191, 159, 0.25) 0%,
+    rgba(43, 191, 159, 0.85) 32%,
+    var(--core) 50%,
+    rgba(43, 191, 159, 0.85) 68%,
+    rgba(43, 191, 159, 0.25) 100%
+  );
+}
+
+.demo-toast {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 500 12px var(--mono);
+  color: #fff;
+  background: rgba(20, 20, 22, 0.92);
+  padding: 6px 12px;
+  border-radius: 7px;
+}
+
+/* ---- frame 3: the rail, close up ---- */
+
+.bigrail {
+  position: relative;
+  width: 140px;
+  height: 560px;
+  border-radius: 0 32px 32px 0;
+  overflow: hidden;
+  background: rgba(128, 128, 128, 0.22);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.18),
+    0 0 90px rgba(43, 191, 159, 0.55);
+}
+.bigrail .fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleY(var(--fill, 0.62));
+  transform-origin: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(43, 191, 159, 0.25) 0%,
+    rgba(43, 191, 159, 0.85) 32%,
+    var(--core) 50%,
+    rgba(43, 191, 159, 0.85) 68%,
+    rgba(43, 191, 159, 0.25) 100%
+  );
+}
+.railwrap { display: flex; justify-content: center; }
+
+/* ---- frame 4: the real panel ---- */
+
+.panelwrap { display: flex; justify-content: center; }
+.panelwrap img {
+  width: 340px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* ---- frame 5: the fine print ---- */
+
+.fine {
+  margin: 0 auto;
+  text-align: center;
+}
+.fine h1 {
+  font: 600 52px/1.15 var(--mono);
+  letter-spacing: -0.02em;
+  margin-bottom: 44px;
+}
+.fine h1 em { font-style: normal; color: var(--teal); }
+.fine ul {
+  list-style: none;
+  font: 400 21px/2.2 var(--mono);
+  color: var(--dim);
+}
+.fine li::before { content: "· "; color: var(--teal); }
+
+/* ---- tile and marquee ---- */
+
+.edge-rail {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.edge-rail.l {
+  left: 0;
+  background: rgba(128, 128, 128, 0.3);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+.edge-rail.r {
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(43, 191, 159, 0.25),
+    rgba(43, 191, 159, 0.85) 32%,
+    var(--core) 50%,
+    rgba(43, 191, 159, 0.85) 68%,
+    rgba(43, 191, 159, 0.25)
+  );
+  box-shadow: 0 0 60px rgba(43, 191, 159, 0.6);
+}

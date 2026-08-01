@@ -1,0 +1,212 @@
+/* First-run page. Same language as widemore.page: dark glass, one teal, the
+   toast's monospace. The demo styles mirror the site's so the lesson matches
+   the ad. */
+
+:root {
+  --ink: #0e1013;
+  --panel: #14161a;
+  --well: #1c2129;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #e6ebee;
+  --dim: #8a939e;
+  --teal: #2bbf9f;
+  --core: #54d3b7;
+  --paper: #f7f5f0;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font: 400 16px/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--teal); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: rgba(43, 191, 159, 0.35); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px max(24px, 4vw) 80px;
+}
+
+.wordmark { font: 600 15px var(--mono); color: var(--dim); margin-bottom: 28px; }
+
+h1 {
+  font: 600 clamp(2rem, 5vw, 3.4rem)/1.14 var(--mono);
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+h1 em { font-style: normal; color: var(--teal); }
+
+.sub { max-width: 60ch; color: var(--dim); margin-bottom: 36px; }
+.sub strong { color: var(--text); font-weight: 500; }
+
+/* ---- the practice browser (mirrors the site demo) ---- */
+
+.browser {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.dots { display: flex; gap: 6px; }
+.dots span { width: 11px; height: 11px; border-radius: 6px; }
+.dots span:nth-child(1) { background: #e0605c; }
+.dots span:nth-child(2) { background: #e0aa39; }
+.dots span:nth-child(3) { background: #35b455; }
+.urlbar {
+  flex: 1;
+  max-width: 460px;
+  font: 400 12px var(--mono);
+  color: var(--dim);
+  background: var(--well);
+  border-radius: 7px;
+  padding: 5px 12px;
+}
+
+.demo-page {
+  position: relative;
+  height: min(400px, 52vh);
+  background: var(--paper);
+  overflow: hidden;
+  font-size: 10.5px;
+  transition: font-size 0.5s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+.demo-page.zoomed { font-size: 17px; }
+
+.demo-col {
+  width: 38%;
+  margin: 2.6em auto 0;
+  transition: width 0.5s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+.demo-page.zoomed .demo-col { width: 86%; }
+
+.tl { height: 0.6em; border-radius: 0.3em; background: #dbd6c9; margin: 0.62em 0; }
+.tl.h { height: 1.3em; width: 62%; background: #c6c0ae; margin: 0 0 1em; }
+.tl.w95 { width: 95%; }
+.tl.w88 { width: 88%; }
+.tl.w75 { width: 75%; }
+.tl.w60 { width: 60%; }
+.tl.gap { margin-top: 1.5em; }
+
+.demo-rail {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36%;
+  width: 22px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  cursor: pointer;
+  transition: height 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.demo-rail.left { left: 0; }
+.demo-rail.right { right: 0; }
+.demo-rail:hover { height: 58%; }
+.demo-rail .bar {
+  position: relative;
+  width: 15px;
+  overflow: hidden;
+  /* bolder than the real resting rail: the lesson's first job is being found */
+  background: rgba(43, 191, 159, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(43, 191, 159, 0.6),
+    0 0 14px rgba(43, 191, 159, 0.3);
+  transition: background 0.16s ease;
+}
+.demo-rail.left .bar { border-radius: 0 8px 8px 0; }
+.demo-rail.right .bar { border-radius: 8px 0 0 8px; }
+.demo-rail:hover .bar { background: rgba(43, 191, 159, 0.75); }
+.demo-rail .fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleY(0);
+  transform-origin: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(43, 191, 159, 0.25) 0%,
+    rgba(43, 191, 159, 0.85) 32%,
+    var(--core) 50%,
+    rgba(43, 191, 159, 0.85) 68%,
+    rgba(43, 191, 159, 0.25) 100%
+  );
+}
+.demo-rail.arming .fill {
+  transform: scaleY(1);
+  transition: transform 320ms linear;
+}
+.demo-rail.arming .bar {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 0 18px rgba(43, 191, 159, 0.65);
+  transition: box-shadow 320ms ease-in;
+}
+
+.demo-toast {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 500 12px var(--mono);
+  color: #fff;
+  background: rgba(20, 20, 22, 0.92);
+  padding: 6px 12px;
+  border-radius: 7px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.demo-toast.show { opacity: 1; }
+
+.caption {
+  margin: 18px 0 48px;
+  font: 400 13px var(--mono);
+  color: var(--dim);
+  text-align: center;
+}
+
+/* ---- the three pointers ---- */
+
+.pointers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--line);
+  padding-top: 36px;
+}
+.pointers h2 { font: 600 14px var(--mono); margin-bottom: 8px; }
+.pointers p { color: var(--dim); font-size: 14px; }
+kbd {
+  font: 500 13px var(--mono);
+  color: var(--text);
+  background: var(--well);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 7px;
+}
+
+@media (max-width: 700px) {
+  .pointers { grid-template-columns: 1fr; gap: 22px; }
+  .demo-page { height: 320px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-page, .demo-col, .demo-rail, .demo-rail .bar { transition: none; }
+  .demo-rail.arming .fill { transition: transform 320ms linear; }
+  .demo-rail.arming .bar { transition: none; }
+}
