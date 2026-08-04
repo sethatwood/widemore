@@ -353,6 +353,13 @@ kbd {
 .get-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .get h3 { font: 600 16px var(--mono); margin-bottom: 10px; }
 .get p { color: var(--dim); font-size: 15px; margin-bottom: 18px; max-width: 44ch; }
+/* Google's badge ships light-background only -- no dark variant, and their
+   brand rules forbid recoloring it. Sized to match the weight of an
+   ordinary button rather than dominate the section; radius+shadow give it
+   a defined edge against the dark page since it has no border of its own
+   contrast to lean on otherwise. */
+.cws-badge { display: inline-block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35); }
+.cws-badge img { display: block; height: 54px; width: auto; border-radius: 8px; }
 
 form.signup { display: flex; gap: 10px; max-width: 420px; }
 form.signup input[type="email"] {
