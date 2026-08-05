@@ -1,3 +1,13 @@
+<div align="center">
+
+<img src="store/marquee.png" alt="widemore — i wish it was wide more." width="700">
+
+[![CI](https://github.com/sethatwood/widemore/actions/workflows/ci.yml/badge.svg)](https://github.com/sethatwood/widemore/actions/workflows/ci.yml)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/nbkajkoaapnlkeegegeiebjafabkaijc.svg?style=flat-square&color=2bbf9f&label=chrome%20web%20store)](https://chromewebstore.google.com/detail/nbkajkoaapnlkeegegeiebjafabkaijc)
+[![License: MIT](https://img.shields.io/github/license/sethatwood/widemore?style=flat-square&color=2bbf9f)](LICENSE)
+
+</div>
+
 # widemore
 
 Hover the screen edge and the page's main content spreads to fill the window.
@@ -8,9 +18,16 @@ happy on any screen with room to spare.
 Named for what you actually think when you hit a narrow column in a wide
 window: *i wish it was wide more.*
 
-**[widemore.page](https://widemore.page)** — the site, with a live demo. The
-Chrome Web Store listing is in review; widemore runs in Chrome and Brave.
-MIT licensed.
+**[widemore.page](https://widemore.page)** — the site, with a live demo.
+widemore runs in Chrome and Brave from the same listing.
+
+- [Load it](#load-it)
+- [Tests](#tests)
+- [The edge rails](#the-edge-rails)
+- [Make it yours](#make-it-yours)
+- [Breakpoints](#breakpoints)
+- [How detection works](#how-detection-works)
+- [Known rough edges](#known-rough-edges)
 
 ## Load it
 
