@@ -28,18 +28,93 @@
 
   const textLen = (el) => (el.innerText ? el.innerText.trim().length : 0)
 
-  // Descend while a single child still holds nearly all of the text. This walks
-  // past the stack of interchangeable wrapper divs and stops at the element
-  // where content first branches into siblings -- the actual content column.
+  // The box the children actually get: border box less scrollbar and padding.
+  // Not innerWidth, which is the window's and is used further down.
+  const contentWidth = (el) => {
+    const cs = getComputedStyle(el)
+    return (
+      el.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0)
+    )
+  }
+
+  const MOST = 0.9 // "nearly all of the text"
+  const AGREE = 0.02 // sibling columns this close in width are one column
+
+  // The other way a wrapper gives itself away: its text is spread across
+  // sibling sections that each wrap the same centred width, and the wrapper
+  // itself is a full-bleed shell holding them. No single child holds the text,
+  // so the descent below stops -- but a width that several sections arrive at
+  // independently is the content column as surely as a lone child is, and
+  // measuring the shell instead reports a page that fills the window when the
+  // reading column is half of it. This is the ordinary stacked-section page:
+  // hero, feature, footer-ish call to action, each in its own max-width.
+  //
+  // Returns the section carrying the most of that text -- they agree on width,
+  // so any of them measures the same, and the busiest one names it best. It is
+  // a stand-in for the set, though, not a container of it, so the descent ends
+  // there: every step above holds nearly all of the page's text and can be
+  // narrowed further on that basis, while this one holds only its own share.
+  const sameColumn = (el, total) => {
+    const kids = [...el.children]
+      .map((c) => {
+        const r = c.getBoundingClientRect()
+        return { el: c, text: textLen(c), width: r.width, left: r.left }
+      })
+      // No height bar here, unlike the descent: a short section is still the
+      // column it sits in, and dropping it would lose its share of the text
+      // and with it the proof that the sections between them hold all of it.
+      .filter((k) => k.text > 0 && k.width > 200)
+      .sort((a, b) => b.text - a.text)
+
+    // The fewest siblings that between them carry nearly all of the text. A
+    // page whose text is scattered thinly across many boxes -- a card grid, a
+    // feed -- never satisfies this with the few it is allowed, and is left
+    // alone.
+    let carried = 0
+    let n = 0
+    while (n < kids.length && carried < total * MOST) carried += kids[n++].text
+    if (carried < total * MOST || n < 2) return null
+
+    const set = kids.slice(0, n)
+    const widths = set.map((k) => k.width)
+    const wide = Math.max(...widths)
+    const slack = wide * AGREE
+    // Disagreement means these are not one column repeated: a full-bleed band
+    // next to a narrow one, or a sidebar beside an article. Nothing to learn.
+    if (wide - Math.min(...widths) > slack) return null
+    // Stacked, not side by side. Equal-width boxes sitting in a row -- a card
+    // grid, a three-across feature strip -- pass the width test just as
+    // cleanly as sections do, and following one into a card would measure a
+    // third of the column and zoom to three times what the page can take. A
+    // repeated column runs DOWN the page, so its members share a left edge.
+    if (Math.max(...set.map((k) => k.left)) - Math.min(...set.map((k) => k.left)) > slack) {
+      return null
+    }
+    // And the narrowing has to be the children's own doing. Measured against
+    // the outer edge, any padded box looks like it holds a narrower column --
+    // but children that simply fill the space their parent left them are not a
+    // column, they are the parent's padding seen from the inside, and taking
+    // them would measure the same page differently depending on how deep its
+    // padding happened to sit. Against the content box, only a real max-width
+    // counts.
+    if (wide > contentWidth(el) * (1 - AGREE)) return null
+
+    return kids[0].el
+  }
+
+  // Descend while a single child still holds nearly all of the text, or while
+  // the children that do hold it are all the same column. This walks past the
+  // stack of interchangeable wrapper divs and stops at the element where
+  // content genuinely branches -- the actual content column.
   const tighten = (el) => {
     for (let i = 0; i < 20; i++) {
       const total = textLen(el)
       if (total === 0) break
       const kid = [...el.children].find((c) => {
         const r = c.getBoundingClientRect()
-        return textLen(c) >= total * 0.9 && r.width > 200 && r.height > 200
+        return textLen(c) >= total * MOST && r.width > 200 && r.height > 200
       })
-      if (!kid) break
+      if (!kid) return sameColumn(el, total) || el
       el = kid
     }
     return el

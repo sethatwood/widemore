@@ -25,3 +25,5 @@ jobs:
         run: node -e "JSON.parse(require('fs').readFileSync('manifest.json','utf8'))"
       - name: zoom loop replay
         run: node test/zoomfit.test.js
+      - name: content column replay
+        run: node test/detect.test.js
