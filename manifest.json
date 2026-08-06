@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "widemore",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hover the screen edge and the page's main content spreads to fill the window.",
   "permissions": [
     "storage"
